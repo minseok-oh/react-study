@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router'
-import './App.css'
+import './styles/globals.css'
 import { Main } from './pages/main'
 import { NotFound } from './pages/not-found'
 
