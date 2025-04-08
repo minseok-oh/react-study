@@ -1,13 +1,13 @@
-import { useState } from 'react'
+import { Route, Routes } from 'react-router'
 import './App.css'
-import { Task } from './types/Task'
+import { Main } from './pages/main'
+import { NotFound } from './pages/not-found'
 
 export const App = () => {
-  const [tasks, setTasks] = useState<Task[]>([])
-
   return (
-    <div>
-      <h1>To-Do List</h1>
-    </div>
+    <Routes>
+      <Route path="/" element={<Main />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   )
 }
