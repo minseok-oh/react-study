@@ -1,7 +1,8 @@
 export interface Task {
-  id: string,
+  id: number,
   title: string,
   content: string,
-  startDate: string,
-  endDate: string,
+  startDate: Date,
+  endDate: Date,
+  isDone: boolean,
 }
