@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Position } from '../../types/position'
 
-export const UserInputModal = () => {
+export const UserInputModal = ({
+  getWeatherByUserPosition,
+}: {
+  getWeatherByUserPosition: (nx: number, ny: number) => void
+}) => {
   const [position, setPosition] = useState<Position[]>([])
+  const [selectedPosition, setSelectedPosition] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,16 +22,29 @@ export const UserInputModal = () => {
     fetchData()
   }, [])
 
+  const handleUserPosition = () => {
+    const selectedLocation = position.find(
+      (item) => item.location === selectedPosition
+    )
+
+    if (selectedLocation) {
+      getWeatherByUserPosition(selectedLocation.x, selectedLocation.y)
+    }
+  }
+
   return (
     <div className="shadow-lg outline outline-black/5 box-content w-70 rounded-xl p-4 flex flex-col gap-6 fixed left-1/2 -translate-x-1/2 top-4/5">
-      <select>
+      <select onChange={(e) => setSelectedPosition(e.target.value)}>
         {position.map((item) => (
           <option key={item.location} value={item.location}>
             {item.location}
           </option>
         ))}
       </select>
-      <button className="bg-gray-500 text-white px-4 py-2 rounded-md">
+      <button
+        className="bg-gray-500 text-white px-4 py-2 rounded-md"
+        onClick={() => handleUserPosition()}
+      >
         Find
       </button>
     </div>
