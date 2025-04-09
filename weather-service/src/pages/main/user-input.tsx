@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Position } from '../../types/position'
 
-export const UserInputModal = ({
+export function UserInput({
   getWeatherByUserPosition,
 }: {
   getWeatherByUserPosition: (nx: number, ny: number) => void
-}) => {
+}) {
   const [position, setPosition] = useState<Position[]>([])
   const [selectedPosition, setSelectedPosition] = useState<string | null>(null)
 
