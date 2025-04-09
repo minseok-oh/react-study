@@ -4,7 +4,11 @@ const getWeatherApiUrl = (nx: number, ny: number) => {
   const uri = import.meta.env.VITE_WEATHER_API_URL
   const serviceKey = import.meta.env.VITE_WEATHER_API_KEY
   const baseDate = new Date().toISOString().split('T')[0].replace(/-/g, '')
-  const baseTime = new Date().toISOString().split('T')[1].split(':')[0] + '00'
+  
+  const now = new Date();
+  const hours = now.getHours().toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const baseTime = `${hours}${minutes}`;
 
   return `${uri}?serviceKey=${serviceKey}&pageNo=1&numOfRows=100&dataType=JSON&base_date=${baseDate}&base_time=${baseTime}&nx=${nx}&ny=${ny}`
 }
